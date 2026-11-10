@@ -1,0 +1,18 @@
+# Welcome to the O3R OVP93x documentation
+
+:::{toctree}
+    :maxdepth: 2
+    :hidden:
+Home <self>
+<< Back to O3R Docs <https://ifm3d.com>
+:::
+
+This website contains all the documentation for the O3R OVP93x platform.
+
+:::::{grid} 1
+::::{grid-item}
+    :class: homepage-icons
+![News icon](./resources/ifm3d_landing_news.svg)
+Coming Soon!
+::::
+:::::
