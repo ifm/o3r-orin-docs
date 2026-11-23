@@ -1,0 +1,58 @@
+
+# Modes
+
+Check out our video on how to adjust the visible range for the O3R cameras:
+:::{youtube} LhtemnOsJp4
+:::
+
+
+## Overview
+
+The `mode` parameter selects a standard measurement range or a cyclic sequence of ranges.
+The default is `standard_range6m`.
+
+| Mode | Measurement range |
+| --- | --- |
+| `standard_range2m` | 2 m |
+| `standard_range3m` | 3 m |
+| `standard_range4m` | 4 m |
+| `standard_range5m` | 5 m |
+| `standard_range6m` | 6 m |
+| `cyclic_4m_2m_4m_2m` | Alternating 4 m and 2 m |
+| `cyclic_6m_3m_6m_3m` | Alternating 6 m and 3 m |
+
+See the [acquisition parameter references](AcquisitionParams/index_acquisition_params.md) for mode-specific settings.
+
+## Description
+
+The O3R has the specificity to provide several measurement ranges. A distance measurement is computed only for a subspace of the scene. Elements *fully* outside of the range are not taken into account and have no impact on the measurement (for instance by causing artifacts like [stray-light](./ProcessingParams/strayLight.md) or Multi-Path Interference).
+
+>Note: Objects *very* close to the beginning or end of the measurement range can still have an impact on the measurement.
+
+The O3R provides five standard measurement ranges: two, three, four, five, and six meters.
+These ranges use different frequencies to perform the Time-of-Flight (ToF) measurement and therefore show different characteristics, especially in how they are affected by artifacts.
+The longer-range modes show higher noise levels than the shorter-range modes.
+
+### Cyclic modes
+
+Cyclic modes alternate between two measurement ranges from frame to frame:
+
+- `cyclic_4m_2m_4m_2m` alternates between the four-meter and two-meter ranges.
+- `cyclic_6m_3m_6m_3m` alternates between the six-meter and three-meter ranges.
+
+## Example
+
+Let’s look at a simple scene: three boxes are placed in front of the camera, one, two, and three meters away (see image below).
+![RGB view of the scene](resources/modes_scene.png)
+
+The table below shows the computed distance measurement in the distance image view and the point cloud view for two of the available modes (2 m and 4 m):
+
+| Mode| Distance Image| Point Cloud|
+|--|--|--|
+| 2 m| ![Distance image for the two meter mode](resources/2m_mode_distance.png)| ![Point cloud for the two meter mode](resources/2m_mode_cloud.png)|
+| 4 m| ![Distance image for the four meter mode](resources/4m_mode_distance.png)| ![Point cloud for the four meter mode](resources/4m_mode_cloud.png)|
+
+The third box, which is three meters away from the camera, is outside of the measurement range when using the two-meter mode; however it is visible when using the four-meter mode.
+
+> Note: Using the [offset](./AcquisitionParams/index_acquisition_params.md#offset) parameter in combination with the mode is interesting and allows for a lot of flexibility in using the coded modulation ToF technology. We encourage you to investigate strategies using multiple modes in combination with offsets.
+

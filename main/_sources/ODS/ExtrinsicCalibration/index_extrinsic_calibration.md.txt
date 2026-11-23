@@ -1,0 +1,8 @@
+---
+orphan: true
+nosearch: true
+---
+
+# Extrinsic calibration for ODS
+
+To choose a calibration procedure for your ODS cameras and VPU, follow [Step 1: Extrinsic calibration](../getting_started.md#step-1-extrinsic-calibration) in the ODS getting started guide.

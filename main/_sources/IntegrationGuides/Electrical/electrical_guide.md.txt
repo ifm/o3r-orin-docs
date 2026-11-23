@@ -1,0 +1,129 @@
+# Electrical Integration Guide
+
+## System overview
+
+The O3R is a modular platform: a central VPU (Video Processing Unit) connects to up to four camera heads. Power is wired to the VPU via an M12 connector; each camera head connects to the VPU through a High-speed FAKRA Mini (HFM) cable. The O3R VPU also provides a CAN interface.
+
+For the full cable and connector catalog (HFM cables, M12 power/CAN cable, drag-chain variants), see the [available hardware list](../../AvailableHardware/hardware_specifications.md). For the hardware-port to PCIC-port mapping, see the [ports overview](../../Technology/PortsOverview/ports_overview.md).
+
+---
+
+## Power supply and consumption
+
+Use a PELV supply and follow the model-specific operating instructions for the permitted voltage range, energy limitation, and overcurrent protection.
+Disconnect the power supply before making electrical connections.
+
+The following tables show the measured OVP93x power and current consumption in standard mode and super mode.
+The measurements are dated September 29, 2026.
+
+### Measured configurations
+
+Each row gives the measured consumption for that configuration.
+The VPU supplies the connected camera heads; rows with heads include both the VPU and those heads.
+
+| Configuration | Standard mode power [W] | Standard mode current [mA] | Super mode power [W] | Super mode current [mA] |
+| --- | --- | --- | --- | --- |
+| VPU only | 23 | 900 | 42 | 1700 |
+| VPU + one 3D head | 35 | 1500 | 55 | 2300 |
+| VPU + two 3D heads | 48 | 2000 | 68 | 2800 |
+| VPU + four 3D heads | 75 | 3100 | 94 | 3900 |
+
+### Consumption examples
+
+- A VPU without camera heads consumes 23 W / 900 mA in standard mode or 42 W / 1700 mA in super mode.
+- A VPU with one 3D head consumes 35 W / 1500 mA in standard mode or 55 W / 2300 mA in super mode.
+- A VPU with two 3D heads consumes 48 W / 2000 mA in standard mode or 68 W / 2800 mA in super mode.
+- A VPU with four 3D heads consumes 75 W / 3100 mA in standard mode or 94 W / 3900 mA in super mode under the maximum-load conditions below.
+
+### Maximum-load consumption
+
+With maximum CPU/GPU load and four 3D heads operating at 20 fps, the maximum system power and RMS current are:
+
+| Mode | Maximum RMS current [mA] | Maximum system power [W] | Power breakdown |
+| --- | --- | --- | --- |
+| Standard mode | 3100 | 75 | 23 W VPU + 4 × 13 W heads |
+| Super mode | 3900 | 94 | 42 W VPU + 4 × 13 W heads |
+
+For example, the standard-mode total is 23 W for the VPU plus 52 W for four heads, giving 75 W.
+In super mode, the VPU contribution is 42 W, giving a system total of 94 W.
+Use the individually measured rows above for configurations with fewer heads rather than extrapolating from this maximum-load breakdown.
+RMS current is not an instantaneous peak or startup-current rating; follow the operating instructions when selecting the power supply and protection.
+
+### ODS load case
+
+For example, an ODS application with four 3D heads in standard mode consumes 67 W / 2800 mA for the VPU and heads combined.
+
+| Configuration | Mode | Measured power [W] | Measured current [mA] |
+| --- | --- | --- | --- |
+| ODS with four 3D heads | Standard mode | 67 | 2800 |
+
+This application load case is separate from the maximum CPU/GPU-load result.
+
+Electrical power consumption does not, by itself, validate a heat-sink design or establish how much heat each component must dissipate.
+See the [heat dissipation guidance](../Mechanical/mechanical_guide.md#heat-dissipation) for the remaining thermal validation tasks.
+
+---
+
+## Wiring
+
+Check out our wiring video:
+:::{youtube} msPANzaOuSY
+:::
+
+:::{note}
+Use `1 Gigabit/s` rated hardware for all Ethernet cables and Ethernet switches connected to the O3R platform.
+:::
+
+---
+
+## Cable type and size
+
+Using the right length and type of cable is an effective way to keep the cables organized.
+Standard HFM cables are available in 1 m, 2 m, and 5 m lengths for dual 2D/3D and single 3D-only connections.
+A 0.3 m single-connection cable is also available.
+
+Use drag-chain-compatible cables where high flexibility is required:
+
+- For combined 2D and 3D connections, use E3R110 (2 × 5 m), E3R111 (2 × 10 m), or E3R112 (2 × 15 m) with the E3R106 adapter assembly.
+- For 3D-only connections, use E3R113 (5 m) or E3R114 (10 m) with the E3R108 adapter cable.
+There is no 15 m 3D-only cable variant.
+
+See the [cable catalog](../../AvailableHardware/hardware_specifications.md#hardware-list) for article references and connection assemblies.
+
+---
+
+## IP rating
+
+The cables have an IP rating of `IP54`, which means they are protected against limited ingress of dust and water, but are not completely waterproof.
+This IP rating applies to both ends of the cable, meaning that liquid ingress is reduced both at the head connector itself and at the connector to the OVP (VPU) to reduce capillary effects.
+The FAKRA connector to the OVP VPU housing is rated at `IP50` - the same as the OVP itself.
+
+It's important to note that while IP54-rated cables offer some level of protection against dust and water, they may not be suitable for use in extremely wet or dusty environments. Please see the respective norms as a part of the cable specification sheets [online](https://www.ifm.com)
+
+---
+
+## Preventing ground loops
+
+The VPU-camera-head system is tested for international electromagnetic conformance standards and immunity to the effects of surrounding signals and electrostatic discharge.
+Nonetheless, care must be taken in the integration of the system to prevent the formation of ground loops.
+
+Ground loops are openings in the ground plane which enable surrounding electrical noise to be coupled into the ground plane.
+A ground loop can be formed with the O3R platform via the connection loop camera - OVP - vehicle - bracket - camera.
+Preventing ground loops contributes to signal integrity throughout the electrical assembly.
+
+For most camera mounting positions on a vehicle, an aluminum or steel bracket is required for heat dissipation.
+When mounted directly to the vehicle chassis, this result can result in an electrical bond.
+The electrical bond formed by the contact between the mounting screws and the mounting bracket can be eliminated by using insulating bushings, ifm E3R200.
+These bushings combined with the insulating exterior coating on the camera heads can electrically isolate the head from its mounting while preserving the thermal bond.
+
+---
+
+## CAN interface
+
+The O3R VPU provides a CAN interface. For activation, bitrate configuration and usage examples, see the [CAN documentation](../../Technology/VPU/can.md).
+
+---
+
+## Contact
+
+For electrical integration support, contact the ifm support team via [support.efector.object-ident@ifm.com](mailto:support.efector.object-ident@ifm.com).

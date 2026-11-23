@@ -1,0 +1,7 @@
+(data-streams)=
+(resource-availability-for-the-user)=
+# Running workloads concurrent with ODS
+
+An ODS application instance runs on the OVP93x VPU and shares its resources with user applications.
+
+Documentation in preparation.

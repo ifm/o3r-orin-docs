@@ -1,0 +1,21 @@
+# Firmware
+
+(compatibility-matrix)=
+(firmware-and-hardware-compatibility-matrix)=
+(recommended-hardware)=
+## Firmware workflow
+
+1. Contact [ifm support](mailto:support.efector.object-ident@ifm.com) for firmware availability and the compatible ifm3d and ifmVisionAssistant versions for your OVP930 or OVP931.
+2. Save the current VPU configuration before updating.
+3. Follow the [firmware update instructions](fw_update.md) using ETH0 with a static IP address. Do not interrupt power or the Ethernet connection during the update.
+4. After the VPU reboots, check the installed firmware version, review the configuration, and verify camera acquisition.
+
+:::{toctree}
+:hidden:
+How to update <fw_update>
+:::
+
+(ifm3d-ros2-version-compatibility)=
+## ROS compatibility
+
+ROS 2 integration for OVP93x is not available.

@@ -1,0 +1,51 @@
+# Ethernet interfaces
+
+The O3R has two Ethernet ports, `eth0` and `eth1`. These ports can both be used to communicate with the platform or with external devices (other sensors or computing platforms, displays, etc).
+
+:::{note}
+Use `1 Gigabit/s` rated hardware for all Ethernet cables and Ethernet switches connected to the O3R platform.
+:::
+
+By default, both `eth0` and `eth1` are configured to a static IP, respectively `192.168.0.69`, and `192.168.42.69`.
+
+With the current network setup, we expect `eth0` to be used for communication to and fro a complex network. `eth1` is expected to be used for bringing in external devices and other sensors. You might encounter networking issues if using `eth1` as your primary communication interface, due to the underlying network setting in the O3R VPU linux-based OS.
+
+## Set a static IP
+
+Use one `config set` command to disable DHCP and set the static address.
+This example changes `eth0` from `192.168.0.69` to `192.168.0.70`.
+
+1. Save the following as `eth0.json`.
+   Choose an unused address and use the prefix length (`mask`) and gateway for your network.
+   The gateway must be on the `eth0` subnet. Keep `eth0` and `eth1` on different subnets.
+
+   ```json
+   {
+     "device": {
+       "network": {
+         "interfaces": {
+           "eth0": {
+             "useDHCP": false,
+             "ipv4": {"address": "192.168.0.70", "mask": 24, "gateway": "192.168.0.201"}
+           }
+         }
+       }
+     }
+   }
+   ```
+
+2. Send the file to the VPU at its current IP address, then reboot to apply the settings:
+
+   ```bash
+   ifm3d --ip 192.168.0.69 ovp9xx config set --file eth0.json
+   ifm3d --ip 192.168.0.69 ovp9xx reboot
+   ```
+
+3. Reconnect at the new address and verify the settings:
+
+   ```bash
+   ifm3d --ip 192.168.0.70 ovp9xx config get --path /device/network/interfaces/eth0
+   ```
+
+`eth1` uses a static address only (default `192.168.42.69/24`).
+To change it, set `ipv4.address` and `ipv4.mask` under `eth1`; omit `useDHCP` and the read-only gateway (`0.0.0.0`).

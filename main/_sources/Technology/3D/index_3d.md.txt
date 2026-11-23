@@ -1,0 +1,28 @@
+# 3D camera configuration
+
+The O3R335 3D imager uses time-of-flight (ToF) measurements to provide distance, amplitude, and point cloud data.
+The following table summarizes its specifications.
+
+| Article | Image resolution 3D [px] | Angle of aperture [°] | Framerate [Hz] |
+| ------- | ------------------------ | --------------------- | -------------- |
+| O3R335  | 240 × 164                | 105° × 78°            | 20             |
+
+## Configuration and data
+
+- [States and triggering](triggering.md#states) — acquisition states, free-running operation, and software triggering of connected camera heads.
+- [Modes](modes.md) — measurement ranges and their characteristics.
+- [Acquisition parameters](AcquisitionParams/index_acquisition_params.md) — frame rate, exposure, delay, software trigger groups, offset, and channel settings.
+- [Processing parameters](ProcessingParams/index_processing_params.md) — filters for ToF data and CUDA point cloud processing.
+- [Images](ImagesDescription/index_images_description.md) — available image types, point clouds, and confidence information.
+- [Intrinsic calibration](IntrinsicCalib/intrinsic_calib_3d.md) — optical models and calibration parameters.
+
+:::{toctree}
+:maxdepth: 1
+:hidden:
+modes
+AcquisitionParams/index_acquisition_params
+ProcessingParams/index_processing_params
+triggering
+ImagesDescription/index_images_description
+IntrinsicCalib/intrinsic_calib_3d
+:::

@@ -1,0 +1,39 @@
+# Software and Controls Integration Guide
+
+This guide is for software and controls engineers integrating the O3R into a vehicle or work-cell. It provides an overview of the integration process and links to detailed documentation on specific topics.
+
+## API interface
+
+The O3R is accessed via the **ifm3d API v2.x** (Python or C++). This is the primary interface for configuration, data streaming, and application control.
+
+- [ifm3d API documentation](https://api.ifm3d.com/stable/)
+- [ifm3d-examples repository](https://github.com/ifm/ifm3d-examples/)
+
+## PLC interface
+
+Industrial controls environments can integrate the O3R applications directly over a PLC interface. See the [PLC documentation](../../PLC/index_plc.md) for the setup guide, function blocks, and the TCP/IP and EtherNet/IP interfaces.
+
+## Available applications
+
+| Application                         | Purpose                                                          |
+| :---------------------------------- | :--------------------------------------------------------------- |
+| **ODS** (Obstacle Detection System) | Real-time 3D obstacle detection, occupancy grid and zone outputs |
+
+See the [ODS documentation](../../ODS/index_ods.md) for details.
+
+## ODS software-integration checklist
+
+The key software integration tasks are:
+
+1. Connect to the O3R via the ifm3d API and verify data streaming.
+2. Configure ODS parameters (active ports, zones, presets).
+3. Implement **diagnostics handling** — the vehicle must stop if the ODS group severity is `critical`, `major`, or `not available`.
+4. Wire zone state outputs to vehicle speed commands or emergency stop signals.
+5. Validate end-to-end latency against vehicle stopping distance requirements.
+
+See the [ODS getting started guide](../../ODS/getting_started.md) for detailed steps, and the [diagnostics documentation](../../SoftwareInterfaces/ifmDiagnostic/index_diagnostic.md) for status monitoring.
+
+## Support
+
+Contact the ifm support team at the outset of any project for architecture guidance and integration planning:
+[support.efector.object-ident@ifm.com](mailto:support.efector.object-ident@ifm.com)

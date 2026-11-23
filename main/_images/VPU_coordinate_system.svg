@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Rear-view vector trace of the maintainer's reference, revised 2026-11-05.
+     Reference: CalibrationRoutines/OVPCalibration/images/vpu_refpoint.png
+     (720 x 588 raster). Coordinates below use that raster's pixel frame;
+     the whole drawing is translated, never mirrored or stretched.
+     Housing: x=51..675, crown y=60, base y=497.
+     Mounting centers: (135,77), (533,77), (135,278), (533,278).
+     Origin: (334,177.5), the exact intersection of their diagonals.
+     Retain the four rightmost camera connectors in their reference positions;
+     omit the two leftmost connectors (ports 4/5), without caps or replacement
+     sockets. Black hardware linework and fin direction follow the rear view.
+     Dimension annotations are intentionally omitted: a raster trace preserves
+     drawing proportions, but is not a dimensioned mechanical specification. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="640" viewBox="0 0 800 640" role="img" aria-labelledby="title description">
+  <title id="title">OVP93x VPU coordinate system — rear view</title>
+  <desc id="description">Black technical line drawing of the rear of an OVP93x VPU, with diagonal cooling fins rising to the right, four rear mounting points, four smaller holes, a lower-right housing detail, four camera connectors, and a power/CAN connector. The origin is the intersection of the mounting-point diagonals. Positive X points left in red, positive Y points away from the connectors in green, and positive Z points into the drawing, indicated by a blue circle with a cross. The illustration is schematic, with no mechanical dimensions.</desc>
+  <defs>
+    <path id="housing-outline" d="M51 497V105C51 84 63 68 84 66Q334 54 632 66C657 67 675 83 675 105V497Z"/>
+    <clipPath id="housing-clip">
+      <use href="#housing-outline"/>
+    </clipPath>
+    <clipPath id="lower-right-clip">
+      <path d="M453 497V426Q453 403 477 403H675V497Z"/>
+    </clipPath>
+    <!-- Hollow, round-ended fins; all segments rise to the right.
+         Unlike a repeated dash pattern, these follow the rear-view regions. -->
+    <g id="fin-centerlines" fill="none" stroke-linecap="round">
+      <path id="left-fins" d="M40 119.4L77.4 66 M40 169.4L97 88 M40 218.4L97 137 M40 267.4L97 186 M40 316.4L97 235 M40 365.4L97 284 M-35.3 520L132 281"/>
+      <path id="lower-fins" d="M-1.5 520L142 315 M32.9 520L176.4 315 M67.3 520L210.8 315 M101.7 520L245.2 315 M136.1 520L279.6 315 M170.5 520L314 315 M204.9 520L348.4 315 M239.3 520L382.8 315 M273.7 520L417.2 315 M308.1 520L451.6 315 M342.5 520L486 315 M392.3 494L428 443 M426.8 497L430 492"/>
+      <path id="right-fins" d="M571 96L592 66 M552 172.3L626.4 66 M552 221.4L660.8 66 M476.8 378L695.2 66 M511.2 378L729.6 66 M545.6 378L764 66 M580 378L798.4 66 M614.4 378L832.8 66 M648.8 378L867.2 66"/>
+    </g>
+    <path id="lower-right-fin-centerlines" d="M413.7 515L492.1 403 M448.1 515L526.5 403 M482.5 515L560.9 403 M516.9 515L595.3 403 M551.3 515L629.7 403 M585.7 515L664.1 403 M620.1 515L698.5 403 M654.5 515L732.9 403" fill="none" stroke-linecap="round"/>
+    <g id="camera-connector" fill="#ffffff" stroke="#000000" stroke-width="1.4" stroke-linejoin="miter">
+      <path d="M-3 0H35V3H32V29H0V3H-3Z"/>
+      <path d="M3 3V26H29V3 M6 3V23H26V3 M9 4H23V21H9Z M3 26L6 23 M26 23L29 26 M5 0V3 M27 0V3" fill="none"/>
+    </g>
+    <g id="mounting-point" fill="#ffffff" stroke="#000000" stroke-width="1.6">
+      <circle r="9.5"/>
+      <circle r="5.6" stroke-width="1.1"/>
+      <path d="M-7 0H7 M0 -7V7" fill="none" stroke-width="1.2"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#000000">
+    <text x="36" y="32" font-size="24">OVP93x VPU coordinate system</text>
+    <text x="36" y="60" font-size="16">Rear view</text>
+  </g>
+
+  <g id="reference-frame" transform="translate(36 40)">
+    <g id="rear-housing" stroke="#000000" stroke-linejoin="round">
+      <use href="#housing-outline" fill="#ffffff" stroke="none"/>
+      <g id="cooling-fins" clip-path="url(#housing-clip)">
+        <use href="#fin-centerlines" stroke-width="8.2"/>
+        <use href="#fin-centerlines" stroke="#ffffff" stroke-width="5.4"/>
+        <g clip-path="url(#lower-right-clip)">
+          <use href="#lower-right-fin-centerlines" stroke-width="8.2"/>
+          <use href="#lower-right-fin-centerlines" stroke="#ffffff" stroke-width="5.4"/>
+        </g>
+      </g>
+      <path id="lower-right-detail" d="M453 497V426Q453 403 477 403H675" fill="none" stroke-width="1.7"/>
+      <use href="#housing-outline" fill="none" stroke-width="2.8"/>
+      <path id="bottom-edge" d="M52 494H674" fill="none" stroke-width="1.1"/>
+    </g>
+
+    <!-- Keep the remaining connectors at the source positions, not recentered. -->
+    <g id="camera-connectors">
+      <use id="port0" href="#camera-connector" x="358" y="497"/>
+      <use id="port1" href="#camera-connector" x="303" y="497"/>
+      <use id="port2" href="#camera-connector" x="249" y="497"/>
+      <use id="port3" href="#camera-connector" x="195" y="497"/>
+    </g>
+    <g id="power-can-connector" fill="#ffffff" stroke="#000000" stroke-width="1.6" stroke-linejoin="miter">
+      <path d="M595 497H656V502L651 506H600L595 502Z"/>
+      <path d="M611 506H640V511H646V532L640 539H611L605 532V511H611Z"/>
+      <path d="M599 501H652 M611 509H640 M605 514H646 M605 531H646 M610 535H641 M611 515V530 M640 515V530" fill="none"/>
+      <path d="M625.5 484V547" fill="none" stroke-width="1" stroke-dasharray="12 3 2 3"/>
+    </g>
+
+    <path id="mounting-region" d="M121 65V278Q121 292 135 292H532Q546 292 546 278V65" fill="#ffffff" stroke="#000000" stroke-width="1.4"/>
+    <g id="mounting-centerlines" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="12 3 2 3">
+      <path d="M123 77H555 M123 278H555 M135 67V301 M533 67V301"/>
+    </g>
+    <g id="mounting-diagonals" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="12 5">
+      <path id="diagonal-1" d="M135 77L533 278"/>
+      <path id="diagonal-2" d="M533 77L135 278"/>
+    </g>
+    <g id="rear-mounting-points">
+      <use id="mount-top-left" href="#mounting-point" x="135" y="77"/>
+      <use id="mount-top-right" href="#mounting-point" x="533" y="77"/>
+      <use id="mount-bottom-left" href="#mounting-point" x="135" y="278"/>
+      <use id="mount-bottom-right" href="#mounting-point" x="533" y="278"/>
+    </g>
+    <g id="small-holes" fill="#ffffff" stroke="#000000" stroke-width="1.5">
+      <circle cx="168" cy="114" r="4.2"/>
+      <circle cx="440" cy="114" r="4.2"/>
+      <circle cx="168" cy="259" r="4.2"/>
+      <circle cx="440" cy="259" r="4.2"/>
+    </g>
+
+    <g id="coordinate-axes" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold">
+      <path id="axis-x" d="M334 177.5H185" fill="none" stroke="#ff0000" stroke-width="3"/>
+      <path d="M185 177.5L197 171.5V183.5Z" fill="#ff0000"/>
+      <text id="label-x" x="202" y="197" fill="#ff0000">X-vpu</text>
+
+      <path id="axis-y" d="M334 177.5V50" fill="none" stroke="#92d050" stroke-width="3"/>
+      <path d="M334 50L328 62H340Z" fill="#92d050"/>
+      <text id="label-y" x="340" y="112" fill="#66b333">Y-vpu</text>
+
+      <circle id="origin" cx="334" cy="177.5" r="13.5" fill="#ffffff" stroke="#4472c4" stroke-width="4"/>
+      <path id="axis-z" d="M325 168.5L343 186.5 M325 186.5L343 168.5" fill="none" stroke="#4472c4" stroke-width="3.5"/>
+      <text id="label-z" x="314" y="215" fill="#4472c4">Z-vpu</text>
+    </g>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#000000">
+    <text x="36" y="608">Origin: intersection of the mounting-point diagonals.</text>
+    <text x="36" y="630">+Z points into the drawing. Schematic, not to scale.</text>
+  </g>
+</svg>

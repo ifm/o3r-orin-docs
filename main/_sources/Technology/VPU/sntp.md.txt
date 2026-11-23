@@ -1,0 +1,58 @@
+(ntp-network-time-protocol)=
+(ntpnetwork-time-protocol)=
+(clock-overview)=
+(what-is-ntp)=
+(why-use-ntp-with-the-o3r)=
+# Time synchronization
+
+To compare camera or ODS timestamps with vehicle logs, synchronize the OVP93x VPU and the vehicle to the same time reference.
+Have your NTP server running and reachable before the VPU starts to avoid a clock jump during acquisition.
+
+(how-to-activate-ntp)=
+## Configure the VPU
+
+No NTP server is configured by default.
+Use either ifmVisionAssistant or the ifm3d Python API to configure the VPU's SNTP client.
+
+(activate-ntp-using-ifmvisionassistant)=
+### Using ifmVisionAssistant
+
+1. Open **VPU settings** and select **General**.
+2. Enable **(S)NTP server**.
+3. Select **+** and enter your NTP server address.
+
+```{image} img/ntp.svg
+:alt: The (S)NTP server switch and add-server button in VPU settings
+:width: 800px
+:align: center
+```
+
+(activate-ntp-using-the-ifm3d-api)=
+### Using Python
+
+Replace `192.168.0.110` with your NTP server address:
+
+```python
+from ifm3dpy.device import O3R
+
+vpu = O3R()
+vpu.set({"device": {"clock": {"sntp": {
+    "availableServers": ["192.168.0.110"],
+    "active": True,
+}}}})
+```
+
+(evaluating-ntp-configuration)=
+## Verify synchronization
+
+Read the VPU's SNTP status:
+
+```bash
+ifm3d ovp9xx config get --path /device/clock/sntp
+```
+
+`systemClockSynchronized` must be `true` before you compare timestamps across devices.
+`activeServerAddress` identifies the server the VPU is using.
+If `systemClockSynchronized` remains `false`, check that `active` is `true`, that `availableServers` lists the intended server, and that the VPU can reach it.
+
+For acquisition and receive times, see [Frame timestamps](Timestamps/timestamps.md).

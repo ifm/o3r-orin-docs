@@ -1,0 +1,38 @@
+# Timestamps
+
+The O3R provides multiple timestamps that correspond to different times in the acquisition and processing of an image.
+
+## Acquisition timestamps
+
+The acquisition timestamps refer to the center of [each individual HDR exposure time](../../3D/AcquisitionParams/index_acquisition_params.md#exposure-times) (the O3R uses three exposures, a short, a medium, and a long, in that order). For the RGB image, there is only one exposure, so there is only one timestamp.
+
+These timestamps can be retrieved with the ifm3d library respectively in the [`TOF_INFO`](https://api.ifm3d.com/stable/_autosummary/ifm3dpy.deserialize.TOFInfoV4.html#ifm3dpy.deserialize.TOFInfoV4.exposure_timestamps_ns) or [`RGB_INFO`](https://api.ifm3d.com/stable/_autosummary/ifm3dpy.deserialize.RGBInfoV1.html#ifm3dpy.deserialize.RGBInfoV1.timestamp_ns) buffers.
+
+## Receive timestamps
+
+To measure when the application receives a frame, sample the host clock immediately after delivery to the application.
+The example below uses `time.time_ns()`.
+Do not assume that [Frame.timestamps()](https://api.ifm3d.com/stable/_autosummary/ifm3dpy.framegrabber.Frame.html#ifm3dpy.framegrabber.Frame.timestamps) measures local application reception.
+
+Compare acquisition and host receive times only after establishing that the device and host clocks are synchronized to the same time reference.
+Changing the displayed time zone does not synchronize clocks.
+A host timestamp sampled in Python also includes delivery and scheduling delays; it is not a measurement of network delay alone.
+
+## Synchronization
+
+All timestamps can be synchronized using [sNTP](../sntp.md).
+
+## Example
+
+The example below reads a bounded number of 2D and 3D metadata frames and prints JSON containing acquisition timestamps, acquisition intervals, and host receive times.
+Both selected cameras must already be in `RUN`.
+It does not change camera settings or configure NTP.
+
+```{literalinclude} /ifm3d-examples/ovp9xx/python/core/timestamps.py
+    :language: python
+```
+
+Example invocation:
+```bash
+$ python3 timestamps.py --ip 192.168.0.69 --port-2d port1 --port-3d port0 --frames 30
+```

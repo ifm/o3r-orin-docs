@@ -1,0 +1,24 @@
+# Images description
+
+The O3R provides image buffers and point cloud data for interpreting a scene.
+Use the [image descriptions](imagesDescription.md) for normalization, coordinate conventions, and invalid-pixel values.
+
+## Available data
+
+| Data | Description |
+| --- | --- |
+| [Raw amplitude and amplitude](imagesDescription.md#raw-amplitude-image-and-amplitude-image) | Reflected modulated light, before and after normalization across exposures. |
+| [Radial distance](imagesDescription.md#distance-image-radial) | Distance measured along each pixel's direction. |
+| [Distance noise](imagesDescription.md#distance-noise-radial) | Estimated standard deviation of the distance error. |
+| [Confidence](confidenceImage.md) | Pixel validity and reasons for invalidation. |
+| [Reflectivity](imagesDescription.md#reflectivity) | Estimated reflectivity in the near-infrared spectrum. |
+| [Point cloud](imagesDescription.md#point-cloud-xyz) | Cartesian X, Y, and Z coordinates. |
+| [Unit vectors](imagesDescription.md#unit-vectors) | Pixel directions used with the distance image to compute a point cloud. |
+| [JPEG image](imagesDescription.md#jpeg-image) | JPEG-encoded RGB data from the 2D imager, when available. |
+
+:::{toctree}
+:maxdepth: 1
+:hidden:
+Image descriptions <imagesDescription.md>
+Confidence image <confidenceImage.md>
+:::

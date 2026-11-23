@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mechanical integration guide &mdash; OVP9  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=5800d392" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=d9f55abb"></script>
+        <script src="../../_static/js/versionwarning.js?v=d4224a34"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Electrical Integration Guide" href="../Electrical/electrical_guide.html" />
+    <link rel="prev" title="Integration guides" href="../index_integration_guides.html" />
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZ08KXKV1G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZZ08KXKV1G');
+    </script> -->
+     
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OVP9
+          </a>
+              <div class="version">
+                main
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/index_getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AvailableHardware/hardware_specifications.html">Available Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Firmware/index.html">Firmware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_integration_guides.html">Integration guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Mechanical guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clearance-area">Clearance area</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#o3r335">O3R335</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#heat-dissipation">Heat dissipation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#camera-mounting-for-heat-dissipation">Camera mounting for heat dissipation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vpu-mounting-for-heat-dissipation">VPU mounting for heat dissipation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#vpu-heat-sink">VPU heat sink</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#super-mode-heat-dissipation">Super-mode heat dissipation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-consumption">Power consumption</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clearance-illustrations">Clearance illustrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chassis-lip">Chassis lip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recessed-opening">Recessed opening</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overhanging-load">Overhanging load</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#coordinate-systems">Coordinate systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Electrical/electrical_guide.html">Electrical guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SoftwareControls/software_controls_guide.html">Software &amp; controls guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Maintenance/maintenance_guide.html">Maintenance guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Technology/index_technology.html">Technology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_software_interfaces.html">Software Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CalibrationRoutines/index_calibrations.html">Calibration Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ODS/index_ods.html">ODS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PLC/index_plc.html">PLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../downloadable/index.html">History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OVP9</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index_integration_guides.html">Integration guides</a></li>
+      <li class="breadcrumb-item active">Mechanical integration guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/IntegrationGuides/Mechanical/mechanical_guide.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mechanical-integration-guide">
+<h1>Mechanical integration guide<a class="headerlink" href="#mechanical-integration-guide" title="Link to this heading"></a></h1>
+<p>Start the mounting design with these requirements:</p>
+<ul class="simple">
+<li><p>Keep the <a class="reference internal" href="#o3r335">O3R335 clearance area</a> free of obstructions: 300 mm in front of the camera, with boundaries at 24° in the top view and 36° in the side view, measured from the camera front-face plane.</p></li>
+<li><p>Provide <a class="reference internal" href="#heat-dissipation">heat dissipation</a> for the camera heads and VPU.
+For O3R335, the recommended <a class="reference internal" href="#camera-mounting-for-heat-dissipation">heat-sink dimensions</a> are 165 × 140 × 2.5 mm.</p></li>
+</ul>
+<section id="clearance-area">
+<h2>Clearance area<a class="headerlink" href="#clearance-area" title="Link to this heading"></a></h2>
+<section id="o3r335">
+<h3>O3R335<a class="headerlink" href="#o3r335" title="Link to this heading"></a></h3>
+<p>Keep the clearance area free of permanent obstructions, such as the vehicle chassis or overhanging parts.
+The boundaries start at the edges of the camera housing, without an offset.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>View</p></th>
+<th class="head"><p>Boundary angle from the camera front-face plane</p></th>
+<th class="head"><p>Perpendicular distance in front of the camera</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Top view</p></td>
+<td><p>24° on each side</p></td>
+<td><p>300 mm</p></td>
+</tr>
+<tr class="row-odd"><td><p>Side view</p></td>
+<td><p>36° on each side</p></td>
+<td><p>300 mm</p></td>
+</tr>
+</tbody>
+</table>
+<p>Measure the angles from the camera front-face plane, not from the viewing direction.
+The 300 mm distance runs perpendicular from the center of the camera front face to the end plane shown in the dimensioned drawing.
+The shaded areas represent clearance, not the optical field of view.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/clearance_area_o3r335.drawio.svg"><img alt="O3R335 clearance boundaries starting at the housing edges, at 24 degrees from the front-face plane in the top view and 36 degrees in the side view, extending 300 mm perpendicular to the front face." src="../../_images/clearance_area_o3r335.drawio.svg" width="800px" /></a>
+<figcaption>
+<p><span class="caption-text">O3R335 clearance area in top and side views.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>O3R cameras use active illumination with a field of view wider than that of the optics module.
+Objects obstructing the illumination or lens, especially at close range, can disrupt the signal and cause artifacts that are difficult to filter out.</p>
+<p>Temporary occlusions, such as loads carried by the vehicle, can be acceptable depending on the setup but might impact detection performance.
+For dealing with such occlusions in ODS, refer to <a class="reference internal" href="../../ODS/OverhangingLoads/overhanging_loads.html"><span class="std std-doc">the overhanging loads documentation</span></a>.</p>
+</section>
+</section>
+<section id="heat-dissipation">
+<h2>Heat dissipation<a class="headerlink" href="#heat-dissipation" title="Link to this heading"></a></h2>
+<section id="camera-mounting-for-heat-dissipation">
+<h3>Camera mounting for heat dissipation<a class="headerlink" href="#camera-mounting-for-heat-dissipation" title="Link to this heading"></a></h3>
+<p>The recommended heat-sink dimensions for O3R335 are 165 × 140 × 2.5 mm.</p>
+<p>For the illumination shutdown and restart thresholds, see <a class="reference internal" href="../../Technology/SystemVerification/stress_tests.html#temperature-protection"><span class="std std-ref">temperature protection</span></a>.
+These thresholds do not establish heat-sink dimensions or mounting requirements.</p>
+</section>
+<section id="vpu-mounting-for-heat-dissipation">
+<h3>VPU mounting for heat dissipation<a class="headerlink" href="#vpu-mounting-for-heat-dissipation" title="Link to this heading"></a></h3>
+<p>The thermal load of the VPU and cameras needs to be assessed for the intended operating mode and dissipated through the mounting design.
+This includes:</p>
+<ul class="simple">
+<li><p>A mounting bracket for the VPU device (an additional heat sink is usually not necessary).</p></li>
+<li><p>A combined heat sink and mounting bracket for each O3R camera head.</p></li>
+</ul>
+<section id="vpu-heat-sink">
+<h4>VPU heat sink<a class="headerlink" href="#vpu-heat-sink" title="Link to this heading"></a></h4>
+<p>In cases where heat dissipation is insufficient, for example, if air gaps exist between the mounting surfaces, the internal temperatures will exceed normal operation conditions and the CPU and GPU will automatically downclock to cool down.</p>
+</section>
+</section>
+<section id="super-mode-heat-dissipation">
+<h3>Super-mode heat dissipation<a class="headerlink" href="#super-mode-heat-dissipation" title="Link to this heading"></a></h3>
+<p>Thermal testing demonstrated stable full operation of the OVP93x at 40 W in super mode and 40 °C with passive cooling using an aluminum plate measuring 340 × 200 mm and 8 mm thick.
+These dimensions describe the tested configuration, not a general minimum heat-sink size.</p>
+<p>Super mode has higher measured electrical consumption than standard mode.
+The VPU-only measurements are 42 W in super mode and 23 W in standard mode; these are electrical input-power values, not confirmed mounting-interface heat loads.
+The 94 W maximum-load measurement includes four 3D camera heads and must not be treated as VPU-only dissipation.</p>
+</section>
+<section id="power-consumption">
+<h3>Power consumption<a class="headerlink" href="#power-consumption" title="Link to this heading"></a></h3>
+<p>Use the <a class="reference internal" href="../Electrical/electrical_guide.html#measured-configurations"><span class="std std-ref">measured OVP93x power and current tables</span></a> for standard mode, super mode, and the separate ODS load case.
+The maximum-load system figures are 75 W in standard mode and 94 W in super mode, including the VPU and four 3D heads.
+These are electrical input-power figures, not validated thermal dissipation values for the VPU or a mounting bracket.</p>
+</section>
+</section>
+<section id="clearance-illustrations">
+<h2>Clearance illustrations<a class="headerlink" href="#clearance-illustrations" title="Link to this heading"></a></h2>
+<p>The isometric view shows the <a class="reference internal" href="#o3r335">O3R335 clearance area</a>.
+The shaded volume represents clearance, not the optical field of view.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../_images/clearance_area_o3r335_isometric.drawio.svg"><img alt="Rear three-quarter view of the O3R335 camera facing into a shaded clearance area, with separate top and side insets showing the angle references." src="../../_images/clearance_area_o3r335_isometric.drawio.svg" width="800px" /></a>
+<figcaption>
+<p><span class="caption-text">O3R335 clearance area, rear three-quarter view.
+The spatial view is schematic and not to scale; use the <a class="reference internal" href="#o3r335">dimensioned top and side views</a> for mounting decisions.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have noticed that the illumination area extends past the nominal field of view of the illumination module.
+This is because of the diffuse quality of light: light reaches a wider angle than the specified field of view, with its intensity decreasing as the angle increases.
+This means that objects in the area to the edges of the illumination field of view can still impact the measurements.
+The defined clearance area takes this into account.</p>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following three examples compare mounting positions and obstructions.
+The shaded volume represents the clearance area, not the optical field of view.
+The illustrations are schematic and not to scale; use the <a class="reference internal" href="#o3r335">O3R335 clearance definition</a> for the angles and distance.</p>
+<section id="chassis-lip">
+<h3>Chassis lip<a class="headerlink" href="#chassis-lip" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/chassis_lip.drawio.svg"><img alt="Camera at the chassis edge with the clearance area free, compared with a recessed camera whose lower clearance area is obstructed by the chassis lip." src="../../_images/chassis_lip.drawio.svg" width="950px" /></a>
+<figcaption>
+<p><span class="caption-text">Mounting the camera at the chassis edge keeps the lip out of the clearance area.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="recessed-opening">
+<h3>Recessed opening<a class="headerlink" href="#recessed-opening" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../../_images/recessed_opening.drawio.svg"><img alt="Camera flush with a chassis opening with the clearance area free, compared with a recessed camera whose clearance area intersects the floor and both sides of the opening." src="../../_images/recessed_opening.drawio.svg" width="950px" /></a>
+<figcaption>
+<p><span class="caption-text">Recessing the camera can place the floor and sides of the opening inside the clearance area.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="overhanging-load">
+<h3>Overhanging load<a class="headerlink" href="#overhanging-load" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../../_images/overhang.drawio.svg"><img alt="Camera at the lower chassis edge beneath a short load that leaves the clearance area free, compared with a longer load obstructing the upper clearance area." src="../../_images/overhang.drawio.svg" width="950px" /></a>
+<figcaption>
+<p><span class="caption-text">The shorter load leaves the clearance area free; the longer load obstructs it above the camera.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Pay particular attention to parts of the vehicle that could obstruct the clearance area in corners, or further away than the robot shell itself.</p>
+</div>
+</section>
+</section>
+<section id="coordinate-systems">
+<h2>Coordinate systems<a class="headerlink" href="#coordinate-systems" title="Link to this heading"></a></h2>
+<p>The OVP93x VPU has four camera ports; each connected 2D or 3D stream occupies one port.
+A camera head using both streams occupies two ports.</p>
+<p>The origin of the coordinate system of the camera head is at the center of the four mounting screws on the backplate.
+The default orientation of the coordinate system is such that Z points forward in the viewing direction of the camera, Y points in the opposite direction from the label and X points in the direction of the cables entry.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/head_coordinate_system1.png"><img alt="Camera head coordinate system with its origin at the center of the four rear mounting screws, Z pointing forward, Y away from the label, and X toward the cable entry." src="../../_images/head_coordinate_system1.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Camera head coordinate system.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The origin of the coordinate system of the OVP93x VPU is at the center of the four rear mounting screws, where the diagonals between opposing mounting points intersect.
+In the rear view shown below, +X points left, +Y points away from the connectors, and +Z points into the drawing.
+The circle with a cross marks the +Z direction at the origin.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../_images/VPU_coordinate_system.svg"><img alt="Rear view of an OVP93x VPU with four camera connectors and an origin centered between four rear mounting points. Positive X points left, positive Y away from the connectors, and positive Z into the drawing." src="../../_images/VPU_coordinate_system.svg" width="650px" /></a>
+<figcaption>
+<p><span class="caption-text">OVP93x VPU coordinate system, rear view.
+The illustration is schematic and not to scale.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+<html>
+<head>
+ 
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="footer, address, phone, icons" />
+ 
+	<title>Footer With Address And Phones</title>
+	
+	
+ 
+</head>
+ 
+	<body>
+		
+		<footer class="footer-distributed">
+ 
+		<div class="footer-left">
+ 
+		<p class="footer-links">
+		<a href="index.html">Home</a>
+	·
+		<a href="http://www.o3r.ifm" target="_blank">Learn more</a>
+	·
+		<a href="/latest/_static/privacy-policy.html" target="_blank">Privacy Policy</a>
+
+		</p>
+ 
+		<p class="footer-company-name">ifm robotics &copy; 2023</p>
+		</div>
+		
+		<div class="footer-center">
+ 
+		<div>
+		<i class="fa fa-envelope"></i>
+		<p><a href="mailto:support.efector.object-ident@ifm.com">support.efector.object-ident@ifm.com</a></p>
+		</div>
+ 
+		</div>
+ 
+		<div class="footer-right">
+ 
+		<div class="footer-icons">
+ 
+		<a href="https://www.facebook.com/ifmefector" target="_blank"><i class="fa fa-facebook"></i></a>
+		<a href="https://twitter.com/ifm_USA" target="_blank"><i class="fa fa-twitter"></i></a>
+		<a href="https://www.linkedin.com/showcase/ifm-efector" target="_blank"><i class="fa fa-linkedin"></i></a>
+		<a href="https://github.com/ifm" target="_blank"><i class="fa fa-github"></i></a>
+ 
+		</div>
+ 
+		</div>
+ 
+		</footer>
+ 
+	</body>
+ 
+</html>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

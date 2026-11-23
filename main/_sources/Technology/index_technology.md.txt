@@ -1,0 +1,16 @@
+# Technology
+
+Explore the camera streams, IMU, and timing features of the O3R platform.
+Configuration, VPU interfaces, and system verification are covered in separate sections.
+
+:::{toctree}
+:maxdepth: 2
+Ports overview <PortsOverview/ports_overview.md>
+2D <2D/2d.md>
+3D <3D/index_3d.md>
+IMU <VPU/IMU/imu.md>
+Time synchronization <VPU/sntp.md>
+Configuration <configuration.md>
+VPU <VPU/index_vpu.md>
+System verification <SystemVerification/index_system_verification.md>
+:::

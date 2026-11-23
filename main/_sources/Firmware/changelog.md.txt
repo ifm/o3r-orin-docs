@@ -1,0 +1,9 @@
+---
+orphan: true
+nosearch: true
+---
+
+# OVP93x firmware changelog
+
+No OVP93x firmware release notes have been published.
+For firmware availability, see the [firmware workflow](index.md#firmware-workflow).

@@ -1,0 +1,11 @@
+(resources-availability-for-user-code)=
+(legacy-resource-inventory)=
+(available-ram)=
+(cpu-and-gpu-resources)=
+(cameras-only-no-ifm-application)=
+(ods-application)=
+# Resource management
+
+The OVP93x uses an NVIDIA Jetson Orin NX 8GB module.
+
+Documentation in preparation.

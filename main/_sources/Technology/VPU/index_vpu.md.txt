@@ -1,0 +1,16 @@
+# VPU (Vision Processing Unit)
+
+This section covers VPU resources, interfaces, access, and status indicators.
+For sensor data and clock configuration, see [IMU](IMU/imu.md) and [time synchronization](sntp.md).
+
+:::{toctree}
+:maxdepth: 1
+Resource management <ResourceManagement/index_resource_management.md>
+CAN <can.md>
+Ethernet <ethernet.md>
+Security <security.md>
+USB <usb.md>
+Timestamps <Timestamps/timestamps.md>
+SSH <ssh.md>
+LEDs <leds.md>
+:::

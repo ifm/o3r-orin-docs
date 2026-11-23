@@ -1,0 +1,11 @@
+# Camera and platform compatibility
+
+:::{warning}
+TODO: Finalize PDS compatibility once the supporting OVP93x firmware and narrow-field head gen 2 (O3R33x) camera are confirmed.
+PDS is not supported in the initial OVP93x firmware releases, and the narrow-field camera is not available.
+Confirm the camera article number, specifications, availability, and licensing before updating the model references below; they are not finalized compatibility information.
+:::
+
+The PDS application requires a VPU with a PDS license. For one PDS application instance only one 3D camera stream can be used at a time.
+
+The PDS application is used with the O3R335 camera head.

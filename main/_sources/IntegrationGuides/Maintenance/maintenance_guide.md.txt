@@ -1,0 +1,53 @@
+# Maintenance guide
+
+## Operating conditions
+
+O3R335 camera heads are IP54 rated and designed for indoor use.
+Their ambient operating temperature range is −10 to +40 °C.
+Follow the [cleaning instructions](#cleaning-the-camera-heads) to prevent dust and particles from degrading measurement performance.
+
+### Temperature protection
+
+For O3R335, temperature protection stops and restarts camera head illumination under the following conditions.
+These internal head-temperature thresholds are not ambient operating limits or VPU shutdown thresholds.
+
+| Condition | Head temperature | Precondition | System reaction |
+| --- | --- | --- | --- |
+| Overtemperature | > +81 °C | Normal operation | Report a diagnostic error and stop head illumination. |
+| Recovery from overtemperature | ≤ +72 °C | Overtemperature error state | Reset the error and restart head illumination. |
+| Undertemperature | ≤ −14 °C | Normal operation | Report a diagnostic error and stop head illumination. |
+| Recovery from undertemperature | > −13 °C | Undertemperature error state | Reset the error and restart head illumination. |
+
+## Cleaning the camera heads
+
+It is important to clean the camera heads regularly because any dirt, dust, or fingerprints on the lens or front of the camera housing can interfere with the accuracy of the camera's measurements. The camera heads work by emitting a light signal and measuring the time it takes for the signal to reflect back to the sensor. If there is dirt or dust on the lens or illumination module, it can scatter the light signal and cause inaccuracies in the measurements. This can impact the performance of any systems that rely on that data, such as ODS.
+
+Regular cleaning can help to ensure that they are operating at their best performance and producing accurate and reliable data. The best practices to clean the cameras are as follows:
+
+- Use a clean, lint-free cloth: When cleaning the camera, it is important to use a clean, lint-free cloth that will not scratch or damage the lens or sensor. Microfiber cloth is a good choice.
+- Use compressed air or a blower brush to gently blow away any debris from the lens and sensor.
+- Avoid using water or harsh chemicals as this can damage the lens or sensor.
+- Clean regularly: To maintain optimal performance, it is recommended to clean the camera heads regularly. It is advised to clean the cameras heads at least once per week. Depending on the environment shorter cleaning intervals may be required. We recommend to implement a weekly cleaning maintenance for non-dusty environments. For dusty environments a daily cleaning maintenance schedule is advised.
+
+## Field replacement
+
+After replacing a camera head, recheck its mounting position against the [O3R335 clearance requirements and illustrations](../Mechanical/mechanical_guide.md#o3r335).
+
+The application configuration and calibration data are stored on the **VPU**, not on the individual camera heads.
+
+- **Replacing a camera head:** after replacement, the extrinsic calibration of that port must be re-run. Two routines are available: the [Static Camera Calibration (SCC)](../../CalibrationRoutines/SCC/README.md), typically used in production with the vehicle stationary, and the [Motion Camera Calibration (MCC)](../../CalibrationRoutines/MCC/mcc_with_wizard.md), used in the field while the vehicle is moving. See the [calibration routines overview](../../CalibrationRoutines/index_calibrations.md) to choose the appropriate method.
+- **Replacing the VPU:** restore the previously saved configuration (see the configuration-save step in the [firmware update guide](../../Firmware/fw_update.md)) and re-verify the extrinsic calibration of all connected heads. If the vehicle is calibrated in motion, also re-run the [VPU calibration](../../CalibrationRoutines/OVPCalibration/README.md).
+
+:::{important}
+Consult your vehicle or work-cell integrator before replacing a unit to ensure that calibration data is preserved or re-established correctly after replacement.
+:::
+
+:::{note}
+Always verify the extrinsic calibration manually after any hardware replacement.
+:::
+
+## Firmware and diagnostics
+
+- Keep the firmware up to date: see the [firmware update guide](../../Firmware/fw_update.md).
+- Monitor device health during operation via the [diagnostics documentation](../../SoftwareInterfaces/ifmDiagnostic/index_diagnostic.md).
+- To capture the full device state for support, generate a [service report](../../SoftwareInterfaces/ifmDiagnostic/ServiceReport/service_report.md).

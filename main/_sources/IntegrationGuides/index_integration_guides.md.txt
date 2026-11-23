@@ -1,0 +1,13 @@
+# Integration guides
+
+Each implementation of the O3R platform will be unique and require different levels of integration. The following guides help you through the various aspects of integrating the O3R — the VPU and its connected camera heads — into your application, and ensure that you have all the necessary information to do so successfully.
+
+For camera placement, see the [O3R335 clearance definition and illustrations](Mechanical/mechanical_guide.md#o3r335) and the [mounting examples](Mechanical/mechanical_guide.md#examples) in the mechanical guide.
+
+:::{toctree}
+:maxdepth: 1
+Mechanical guide <./Mechanical/mechanical_guide.md>
+Electrical guide <./Electrical/electrical_guide.md>
+Software & controls guide <./SoftwareControls/software_controls_guide.md>
+Maintenance guide <./Maintenance/maintenance_guide.md>
+:::

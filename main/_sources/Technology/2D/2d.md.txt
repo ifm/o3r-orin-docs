@@ -1,0 +1,124 @@
+# 2D camera head configuration
+
+This page covers the O3R335 2D imager's specifications, exposure modes, and acquisition parameters.
+For camera-port connections, see the [ports overview](../PortsOverview/ports_overview.md).
+
+## Specifications
+
+| Article | Image resolution 2D [pix] | Angle of aperture [°] | Framerate [Hz] |
+| ------- | ------------------------- | --------------------- | -------------- |
+| O3R335  | 2560 × 1912               | 96° × 68°             | 20             |
+
+The image resolution in this table applies with binning disabled.
+The delivered JPEG and RTSP image dimensions depend on the `binning` setting.
+
+## Binning and image dimensions
+
+Set `ports/portX/acquisition/binning` for the connected 2D port.
+Binning is available in both automatic and manual exposure modes.
+
+| `binning` | Delivered image dimensions, width × height [pixels] |
+| --- | --- |
+| `off` | 2560 × 1912 |
+| `2x2` (default) | 1296 × 972 |
+
+Use the decoded image's dimensions when allocating image buffers or interpreting pixel coordinates.
+The intrinsic calibration supplied in `RGB_INFO` also changes with binning.
+Use the calibration for the selected setting rather than reusing the unbinned calibration.
+
+## State
+
+The connected 2D port supports two states:
+
+- `CONF`: configure the port without acquiring images.
+- `RUN`: acquire images and make them available for streaming.
+
+For an explicit configuration sequence, set the port to `CONF`, apply the required settings, then set it to `RUN` before connecting a stream client.
+Use the port to which the 2D imager is connected; `port1` is used in the examples below.
+
+## Mode
+
+The 2D imager supports the following modes:
+
+- `standard_autoexposure2D`
+- `standard_manualexposure2D`
+
+In `standard_autoexposure2D`, exposure is selected automatically, but `binning`, `framerate`, and `delay` remain configurable.
+In `standard_manualexposure2D`, `exposureTime` also sets the requested exposure in milliseconds.
+
+## Acquisition parameters
+
+In both exposure modes, set `framerate` from 5 to 20 Hz in 0.5 Hz increments with either binning setting.
+Set `delay` from 0 to 1000 ms in 2 ms increments.
+The manual `exposureTime` parameter accepts values from 0.01 to 46 ms in 0.01 ms increments.
+
+The references list the public acquisition parameters for each mode.
+
+:::::{tabs}
+::::{group-tab} standard_autoexposure2D
+:::{include} ../../generated_docs/camera_2d_auto.md
+:::
+::::
+::::{group-tab} standard_manualexposure2D
+:::{include} ../../generated_docs/camera_2d_manual.md
+:::
+::::
+:::::
+
+## Data interface
+
+The 2D imager provides H.264 video over RTSP and JPEG images over PCIC.
+Both interfaces use the connected 2D port.
+
+### RTSP video
+
+Read `ports/portX/data/rtsp` to discover the endpoint for the selected port:
+
+- `control/tcpPort`: RTSP control port, `554`.
+- `mediaEndpoints`: stream paths, such as `/port1`.
+- `supportedTransports`: `udp` and `tcpInterleaved`.
+
+These endpoint fields are read-only.
+Build the URL from the VPU address and the advertised control port and path.
+For a 2D imager on Port1, the URL is `rtsp://<IP_ADDRESS>:554/port1`, for example `rtsp://192.168.0.69:554/port1`.
+
+Use `ifm3dpy.rtsp.RtspClient` from an ifm3d 2.x build that includes RTSP support and an H.264 decoder.
+Select interleaved RTP over TCP or RTP over UDP according to the application's transport requirements.
+The client can provide the following buffers from each received video frame:
+
+| Buffer | Content |
+| --- | --- |
+| `COMPRESSED_H264_FRAME` | Compressed H.264 frame |
+| `RGB_IMAGE` | Decoded RGB image, `uint8` |
+| `YUV420_IMAGE` | Decoded YUV420 image, `uint8` |
+| `RGB_INFO` | Frame metadata, including frame counter, acquisition timestamp, reported exposure, and calibration |
+
+The decoded buffer shapes depend on binning:
+
+| `binning` | `RGB_IMAGE` shape (height, width, channels) | `YUV420_IMAGE` shape (rows, columns) |
+| --- | --- | --- |
+| `off` | `(1912, 2560, 3)` | `(2868, 2560)` |
+| `2x2` | `(972, 1296, 3)` | `(1458, 1296)` |
+
+The YUV420 buffer contains luminance and chrominance planes; its row count is not the image height.
+Request only the buffers the application needs to avoid unnecessary decoding and conversion work.
+
+See the [ifm3d RTSP client API](https://api.ifm3d.com/latest/_autosummary/ifm3dpy.rtsp.RtspClient.html).
+For a runnable Python example, find `ovp9xx/python/core/rtsp_data.py` in the [ifm3d-examples repository](https://github.com/ifm/ifm3d-examples/).
+The example discovers the endpoint, displays the RGB image in an OpenCV window, prints the received buffers, and supports a frame limit, decoder selection, and TCP or UDP transport.
+Display requires GUI-capable OpenCV and a desktop session; use `--no-display` for headless operation.
+Press `q` or Escape in the window, close it, or press Ctrl+C to stop.
+If it temporarily switches the port from `CONF` to `RUN`, it restores the original state when it stops.
+
+Chrome and Firefox do not play RTSP URLs directly.
+Use an RTSP-capable player or the Python example; VLC builds without the Live555 RTSP client can fail to open the stream.
+
+### JPEG over PCIC
+
+See the [JPEG image description](../3D/ImagesDescription/imagesDescription.md#jpeg-image) for the documented 2D image output.
+Request `JPEG_IMAGE` and `RGB_INFO` through the ifm3d `FrameGrabber` to receive the image and its acquisition metadata together.
+Use the PCIC port reported by the device; Port1 uses `50011`.
+The PCIC port is separate from the RTSP control port.
+Decode `JPEG_IMAGE` before inspecting its width and height; the compressed buffer's length is not an image dimension.
+`RGB_INFO` supplies the frame counter, acquisition timestamp, reported exposure, and intrinsic calibration.
+For changing and saving settings, see [configuration](../configuration.md).

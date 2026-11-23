@@ -66,7 +66,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ifm3d.com">&lt;&lt; Back to O3R Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted/index_getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AvailableHardware/hardware_specifications.html">Available Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Firmware/index.html">Firmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntegrationGuides/index_integration_guides.html">Integration guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Technology/index_technology.html">Technology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_software_interfaces.html">Software Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CalibrationRoutines/index_calibrations.html">Calibration Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODS/index_ods.html">ODS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PLC/index_plc.html">PLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloadable/index.html">History</a></li>
 </ul>
 
         </div>
@@ -95,11 +105,29 @@
              
   <section id="readme">
 <h1>README<a class="headerlink" href="#readme" title="Link to this heading"></a></h1>
-<p>This project contains documentation for the O3R platform. It is used along with other projects to build to ovp9.ifm3d.com site.</p>
+<p>This project contains documentation for the O3R platform. It is used along with other projects to build to ifm3d.com site.</p>
 <blockquote>
 <div><p>Note: it does not cover any of the supported software stacks (ifm3d, ROS, etc).</p>
 </div></blockquote>
-<p>The documentation is intended to be viewed on <a class="reference external" href="https://ovp9.ifm3d.com/">ovp9.ifm3d.com</a>.</p>
+<p>The documentation is intended to be viewed on <a class="reference external" href="https://ifm3d.com/">ifm3d.com</a>.</p>
+<section id="publication-scope">
+<h2>Publication scope<a class="headerlink" href="#publication-scope" title="Link to this heading"></a></h2>
+<p>PDS is not supported in the initial OVP93x firmware releases.
+Keep <a class="reference internal" href="#PDS/"><span class="xref myst">the PDS sources</span></a> and the generated <code class="docutils literal notranslate"><span class="pre">generated_docs/pds*.md</span></code> files in Git, but do not publish them or link to them from customer pages.</p>
+<p>The developer-portal Sphinx configuration excludes these paths beneath <code class="docutils literal notranslate"><span class="pre">ovp9xx_documentation/</span></code>, together with the unused PDS landing icon and contributor material.
+Removing a toctree entry alone is not sufficient.
+For another assembled source layout, apply the same exclusions relative to that source root.
+Do not copy the excluded paths into static assets, source archives, or downloads separately from the Sphinx output.</p>
+<p>Build into an empty output directory and replace the deployed OVP93x output so previously generated PDS pages, source copies, search entries, and images do not remain accessible.
+The source and navigation can be restored after PDS support and its documentation have been confirmed.
+Shared PLC protocol fields remain documented to preserve the wire layout; their presence does not establish PDS support.</p>
+</section>
+<section id="generate-reference-tables">
+<h2>Generate reference tables<a class="headerlink" href="#generate-reference-tables" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="#.scripts/README.md"><span class="xref myst">reference-table generator</span></a> creates the Markdown tables used by the documentation from release-specific parameter schemas and diagnostic definitions.
+Its contributor guide covers dependencies, input paths, diagnostics-only generation, preview output, and validation.
+The <a class="reference internal" href="#.scripts/README.md#gitlab-ci"><span class="xref myst">GitLab CI workflow</span></a> tests the generator and creates downloadable diagnostic tables for a selected OVP93x <code class="docutils literal notranslate"><span class="pre">FIRMWARE_VERSION</span></code>, or for an explicitly selected <code class="docutils literal notranslate"><span class="pre">DIAGNOSTIC_VERSION</span></code>.</p>
+</section>
 </section>
 
 

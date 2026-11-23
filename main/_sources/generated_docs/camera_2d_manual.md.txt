@@ -1,0 +1,6 @@
+| Property       | Type    | Description                                                           | Default   | Minimum   | Maximum   | Enum             | Attributes   |
+|:---------------|:--------|:----------------------------------------------------------------------|:----------|:----------|:----------|:-----------------|:-------------|
+| `delay`        | integer | Delay of trigger with respect to loop-start in [ms], modulo frametime | 0         | 0         | 1000      | `N/A`            | ['conf']     |
+| `exposureTime` | number  | Exposure time of the Imager                                           | 1.0       | 0.01      | 46.0      | `N/A`            | ['conf']     |
+| `framerate`    | number  | Framerate of the Imager                                               | 20.0      | 5.0       | 20.0      | `N/A`            | ['conf']     |
+| `binning`      | string  | Imager Binning                                                        | 2x2       | N/A       | N/A       | `['off', '2x2']` | ['conf']     |

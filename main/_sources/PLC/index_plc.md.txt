@@ -1,0 +1,26 @@
+# PLC application
+
+The OVP93x PLC application supports EtherNet/IP and TCP/IP.
+See the [PLC setup guide](setup_guide.md) for prerequisites.
+
+The purpose of the PLC application is to simplify data exchange between ODS and a programmable logic controller (PLC).
+
+PDS is not supported in the initial OVP93x firmware releases.
+PDS fields retained in the shared PLC wire format do not establish application support.
+
+Communication from PLC to VPU allows basic operations and the ability to configure the system according to a dictionary of presets. 
+Presets are pre-configured sets of zones and active cameras based on different driving scenarios.
+The VPU can be then treated as a server for querying app data from the PLC, and for switching the active preset, depending on the context.
+
+The image below illustrates the communication between the ODS application, PLC application, and the PLC device.
+
+![PLC app to PLC communication](./plc_resources/plc_vpu_comms.drawio.svg)
+
+:::{toctree}
+    :maxdepth: 2
+Setup guide <setup_guide>
+TCP/IP communication interface <tcp_ip_interface>
+Ethernet/IP <ethernet-ip>
+Function block <function_block/index_fb>
+Example driving scenarios <driving_scenarios>
+:::

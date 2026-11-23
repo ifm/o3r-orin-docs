@@ -1,0 +1,164 @@
+# Acquisition parameters
+
+Acquisition parameters depend on the selected 3D imager [mode](../modes.md).
+
+:::{note}
+The min, max and default values of each parameter are defined in the JSON schema.
+To print the schema, use `ifm3d ovp9xx config getSchema`.
+For Python and C++ examples of how to retrieve the JSON schema, see the [ifm3d-examples repository](https://github.com/ifm/ifm3d-examples/).
+:::
+
+The tables list the base `channelValue` default of 0.
+On the device, the default depends on the port: `2 × portNumber`.
+
+:::::{tabs}
+::::{group-tab} standard_range2m
+:::{include} ../../../generated_docs/camera_3d_2m.md
+:::
+::::
+::::{group-tab} standard_range3m
+:::{include} ../../../generated_docs/camera_3d_3m.md
+:::
+::::
+::::{group-tab} standard_range4m
+:::{include} ../../../generated_docs/camera_3d_4m.md
+:::
+::::
+::::{group-tab} standard_range5m
+:::{include} ../../../generated_docs/camera_3d_5m.md
+:::
+::::
+::::{group-tab} standard_range6m
+:::{include} ../../../generated_docs/camera_3d_6m.md
+:::
+::::
+::::{group-tab} cyclic_4m_2m_4m_2m
+:::{include} ../../../generated_docs/camera_3d_cyclic_4m_2m.md
+:::
+::::
+::::{group-tab} cyclic_6m_3m_6m_3m
+:::{include} ../../../generated_docs/camera_3d_cyclic_6m_3m.md
+:::
+::::
+:::::
+
+```{include} ../../../notices/conf_attribute_note.md
+```
+
+## Framerate
+
+Use the `framerate` range reported by the connected device's JSON schema for the selected acquisition mode.
+Verify the achieved frame rate with the intended exposure settings, processing configuration, and VPU workload.
+
+## Exposure Times
+
+Exposure times are utilized to maximize the number of valid pixels in a scene. The use of multiple exposures (HDR) permits the camera to operate in “dynamic” environments that require the detection of dark and light objects at both the minimum and maximum ranges.
+
+The proper exposure time for a pixel depends on factors such as the dynamics of the scene and whether the target is moving or stationary. For highly reflective targets or for motion, a short exposure time is best. For targets far away or with low surface reflectance  choosing high exposure time is preferable.
+As such, it is common that all targets of a scene cannot be properly exposed with a single exposure time.
+To reduce noise and the number of overexposed/underexposed pixels, we use three exposures for each frame.
+The `standard` modes provide two settable exposure times (`exposureLong` and `exposureShort`) plus a third, ultra-short exposure fixed at 20 µs.
+The ultra-short exposure cannot be changed by the customer and helps detect very bright objects, such as reflectors, in the very near range (~1 m).
+Note that using a small ratio of exposure times helps reduce noise in transition regions (where neighboring pixels use different exposure times).
+
+:::{note}
+You can find which exposure time is used for each pixel by analyzing the confidence image as detailed [here](../ImagesDescription/confidenceImage.md).
+:::
+
+## Delay
+
+The `Delay` parameter is not valid in `IDLE` state of the port and when `Delay` parameter is configured in `IDLE` state then the value is set back to its default(0). Please refer to [this](../triggering.md) section for more details.
+
+## Software Trigger Group
+
+### Overview
+
+In `IDLE`, use `swTriggerGroup` to assign ports to a common software-trigger group.
+Ports with the same nonzero value belong to the same group.
+Software triggering any port in that group triggers all ports in the group simultaneously.
+
+:::{note} If the `swTriggerGroup` is zero (default) then no other ports will be triggered except the one which is triggered.
+:::
+
+See [synchronization and triggering](../triggering.md) for the acquisition states and timing settings.
+
+### Example
+
+For illustrative purposes, let's consider an example:
+
+- Four camera heads are connected to the VPU and the `swTriggerGroup` value for the respective ports are as follows.
+
+| PORT | `swTriggerGroup` value | State |
+| ---- | ---------------------- | ----- |
+| 0    | 0                      | IDLE  |
+| 1    | 2                      | IDLE  |
+| 2    | 0                      | IDLE  |
+| 3    | 2                      | IDLE  |
+
+PORT1 and PORT3 belong to software-trigger group 2.
+Software triggering either port triggers both simultaneously.
+PORT0 and PORT2 each have `swTriggerGroup = 0`, so each is triggered independently.
+
+## Offset
+
+### Overview
+
+Coded modulation dictates the measurement range of the camera, for example 0 to 2 m in the 2 m [mode](../modes.md).
+The `offset` parameter lets you shift that range closer to or farther from the camera without changing the mode.
+
+In standard modes, the `offset` parameter is an integer index, not a distance in meters.
+One step equals the mode's nominal maximum range divided by 8, so the step size depends on the selected [mode](../modes.md).
+Each increment shifts the measurement range one step away from the camera, and each decrement shifts it one step closer.
+The index ranges from −6 to 16, with a default of 0, and can be changed frame by frame.
+
+The resulting range for a given index is approximately:
+
+- Start ≈ `offset` × step size.
+- End ≈ nominal maximum range + `offset` × step size.
+
+In cyclic modes, `offset1`–`offset4` configure the four measurement blocks separately.
+For `cyclic_6m_3m_6m_3m`, each index ranges from −6 to 16.
+The defaults are 0 for `offset1`, `offset2`, and `offset3`, and 3 for `offset4`.
+
+### Example
+
+Three boxes are positioned in front of the camera at about one, two, and three meters away.
+![RGB view of the offset scene](resources/offset_scene.png)
+
+In the 2 m [mode](../modes.md), one step equals 2 m / 8 = 0.25 m.
+The table below shows the point cloud for several offset indices and the approximate measurement range, with all other settings at their defaults.
+
+| Offset index | Approximate range | Point cloud |
+| --- | --- | --- |
+| −2 | −0.5 m … 1.5 m | ![Point cloud with offset index −2](resources/offset_-05_cloud.png) |
+| 0 (default) | 0 m … 2 m | ![Point cloud with offset index 0](resources/offset_0_cloud.png) |
+| 6 | 1.5 m … 3.5 m | ![Point cloud with offset index 6](resources/offset_15_cloud.png) |
+| 10 | 2.5 m … 4.5 m | ![Point cloud with offset index 10](resources/offset_25_cloud.png) |
+
+:::{note}
+In the last image, the offset index is 10, corresponding to an approximate range of 2.5 to 4.5 m.
+The noise is higher than in the other images because it increases with the absolute distance from the object to the camera.
+The most robust measurement is in the middle of the measurement range, about 3 to 4 m in this example.
+The ground in front of the box is outside the measurement range.
+:::
+
+Negative offsets bring the far end of the range closer to the camera.
+This can help reduce MPI artifacts or artifacts caused by highly reflective objects by removing the source from the measurement range.
+See the [stray light artifacts documentation](../ProcessingParams/strayLight.md).
+
+:::{note}
+The physical distance represented by each step varies with temperature, exposure time, and [channel value](#channel-selection-and-channel-value), so the ranges above are approximate.
+To read the actual measurement range, use the `TOF_INFO` buffer of the ifm3d API, which reports the real-time minimum and maximum range.
+For Python and C++ examples, see the [ifm3d-examples repository](https://github.com/ifm/ifm3d-examples/).
+:::
+
+## Channel selection and channel value
+
+This concept for cross talk mitigation is based on channels, each channel corresponding to a different modulation frequency. Use a channel combination of mutually exclusive channels to *almost* completely reduce the possibility and effect of cross talk between O3R camera heads.
+Check the configured `channelValue` for each 3D port rather than assuming a value based on the port number.
+
+A channel value difference of 2 has been shown to be adequate. Any additional channel value offset (> 2) will not improve crosstalk mitigation between O3R camera heads.
+Use intermediate, that is odd channel numbers if larger numbers of channels are required: We suggest to geometrically separate cameras with channel differences 1 - for example forward and backward facing cameras on an AGV / AMR.
+
+For a fleet, the vehicle serial number can help assign channel values consistently:
+O3R VPU ETH0 MAC IDs can be used but a “customer-serial number” or even “customer-site-specific-serial-number” is preferred. This is because these numbers are in better control by the customer than a MAC address. So finding a systematic way to map from an (arbitrary increasing) MAC-addresses to (linearly increasing) channels is difficult. Ideally there is a “customer-site-specific-serial-number” that more or less counts the vehicles in one location, i. e.  a simple `mod(number,200)` would do the trick.

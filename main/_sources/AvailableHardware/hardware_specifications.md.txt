@@ -1,0 +1,39 @@
+# Available hardware
+
+## Hardware list
+
+| Hardware                                              | Specification                                                                                                       | Link to Hardware on ifm website                                                                                                                                                                                                                                   | Comment                                                                                                                                                                             |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OVP931                                                | Series product with ODS license                                                                                     | [OVP931](https://www.ifm.com/de/en/product/OVP931)                                                                                                                                                                                                                | --                                                                                                                                                                                  |
+| OVP930                                                | Series product without any application license                                                                      | [OVP930](https://www.ifm.com/us/en/product/OVP930)                                                                                                                                                                                                                | --                                                                                                                                                                                  |
+| O3R335                                                | Opening angle of 105° by 78°                                                                                        | [O3R335](https://www.ifm.com/us/en/product/O3R335)                                                                                                                                                                                                                | --                                                                                                                                                                                  |
+| HFM Cable (High-speed FAKRA Mini) - dual connection   | Connecting both 2D and 3D output of camera heads to the VPU                                                         | 1 meter - [E3R101](https://www.ifm.com/us/en/product/E3R101)<br> 2 meter - [E3R100](https://www.ifm.com/us/en/product/E3R100)<br> 5 meter - [E3R102](https://www.ifm.com/us/en/product/E3R102)                                                                    | --                                                                                                                                                                                  |
+| HFM Cable (High-speed FAKRA Mini) - single connection | Connecting only 3D data stream from the camera heads to the VPU                                                     | 0.3 meter - [E3R107](https://www.ifm.com/us/en/product/E3R107)<br> 1 meter - [E3R103](https://www.ifm.com/us/en/product/E3R103)<br> 2 meter - [E3R104](https://www.ifm.com/us/en/product/E3R104)<br> 5 meter - [E3R105](https://www.ifm.com/us/en/product/E3R105) | --                                                                                                                                                                                  |
+| HFM Cable (High-speed FAKRA) - drag chain compatible  | 2x HFM drag chain compatible cables 2D and 3D                                                                       | 2x 5 meter - [E3R110](https://www.ifm.com/de/en/product/E3R110) <br>2x 10 meter - [E3R111](https://www.ifm.com/de/en/product/E3R111) <br>2x 15 meter - [E3R112](https://www.ifm.com/de/en/product/E3R112)                                                         |  |
+| Drag Chain connection cable                           | 2x connectors cable from VPU to the 2x drag chain cables + 1x HFM Y connector from head to the 2x drag chain cables | 0.3 meter - [E3R106](https://www.ifm.com/de/en/product/E3R106)                                                                                                                                                                                                    |
+| 3D-only drag chain connection cable                   | VPU to camera cable. Must be used with an adapter cable E3R108.                                                     | 5 meters - [E3R113](https://www.ifm.com/de/en/product/E3R113) <br>10 meters - [E3R114](https://www.ifm.com/de/en/product/E3R114) <br>Adapter cable - [E3R108](https://www.ifm.com/de/en/product/E3R108)                                                           | --                                                                                                                                                                                  |
+| M12 Connector Cable                                   | Connector cable for power supply/CAN to VPU                                                                         | [EVC948](https://www.ifm.com/us/en/product/EVC948) <br> [EVC706 A non-CAN variant](https://www.ifm.com/de/en/product/EVC706)                                                                                                                                      | --                                                                                                                                                                                  |
+
+
+:::{Note}
+For combined 2D and 3D drag chain connections, use the adapter assembly [E3R106](https://www.ifm.com/de/en/product/E3R106).
+This assembly consists of:
+
+1. Two identical cables: These connect the two drag chain cables to two VPU ports.
+2. One Y connector: This combines the two ends of the drag chain cables into a single dual Fakra connector, which will be connected to the camera head.
+
+:::
+
+
+## CAD drawings
+
+:::{warning}
+TODO: check the links ?
+:::
+
+The following table includes the links to the CAD files of the available hardware:
+
+| Hardware                               | CAD Drawings                                             |
+| -------------------------------------- | -------------------------------------------------------- |
+| OVP930, OVP931                 | <https://www.ifm.com/us/en/product/OVP930?tab=documents> |
+| O3R335                                 | <https://www.ifm.com/us/en/product/O3R335?tab=documents> |

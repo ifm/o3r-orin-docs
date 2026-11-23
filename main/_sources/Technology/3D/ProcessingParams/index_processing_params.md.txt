@@ -1,0 +1,43 @@
+# Processing parameters
+
+The O3R provides several filters to handle specific ToF artifacts.
+The diagram below shows the filtering process applied to the ToF data to produce distance measurements.
+
+![Diagram of the filtering process](resources/algo_processing_chain.png)
+
+## Parameter reference
+
+Parameter types and defaults can depend on the firmware version.
+See the [processing parameter reference](processing_params.md) for schema-retrieval examples and the parameter table.
+The [filtering process overview](filteringProcess.md) provides additional context.
+
+## Available filters
+
+- [Maximum distance noise](maxDistNoise.md) — invalidates pixels whose estimated distance noise exceeds a threshold.
+- [Minimum amplitude](minAmplitude.md) — invalidates pixels with insufficient received amplitude.
+- [Minimum reflectivity](minReflectivity.md) — invalidates pixels below a reflectivity threshold.
+- [Adaptive noise bilateral filter](bilateralFilter.md) — reduces distance noise while preserving object edges.
+- [Median filter](median.md) — filters pixels using their spatial neighborhood.
+- [Temporal filter](temporalFilter.md) — reduces distance noise using information from multiple frames.
+- [Mixed pixel filter](mixedPixelFilter.md) — removes pixels affected by foreground and background measurements at object edges.
+- [Symmetry threshold](symmetryThreshold.md) — controls the permitted asymmetry in the received signal.
+
+## CUDA processing
+
+See [CUDA point cloud processing](use_cuda.md) for the VPU processing configuration.
+
+:::{toctree}
+:maxdepth: 1
+:hidden:
+Overview of the processing parameters <processing_params.md>
+Filtering process overview <filteringProcess.md>
+Maximum distance noise <maxDistNoise.md>
+Minimum amplitude <minAmplitude.md>
+Minimum reflectivity <minReflectivity.md>
+Adaptive noise bilateral filter <bilateralFilter.md>
+Median filter <median.md>
+Temporal filter <temporalFilter.md>
+Mixed pixel filter <mixedPixelFilter.md>
+Symmetry threshold <symmetryThreshold.md>
+CUDA point cloud processing <use_cuda.md>
+:::

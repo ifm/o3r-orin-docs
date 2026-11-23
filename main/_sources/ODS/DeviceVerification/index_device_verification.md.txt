@@ -1,0 +1,9 @@
+# Testing ODS
+
+:::{warning}
+The heat dissipation guidelines were moved to [the mechanical integration guide](../../IntegrationGuides/Mechanical/mechanical_guide.md).
+:::
+
+:::{toctree}
+Temperature tests <ods_temperature_tests>
+:::
